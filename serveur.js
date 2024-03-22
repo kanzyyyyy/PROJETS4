@@ -1,3 +1,13 @@
+socket.on('ValetClicked', () => {
+        if (nbJ === 1) {
+            createur = socket.id;
+            io.emit('btnShow6');
+        }
+        if (nbMax && nbJ > 1 && nbJ <= nbMax) {
+            io.emit('btnShow7');
+        }
+        if (nbJ > nbMax) { io.emit('btnShow3'); }
+    });
 socket.on('enteredValet', () => {
         if (socket.id === createur) {
             console.log('received startValet event about to emit ValetStarting');
