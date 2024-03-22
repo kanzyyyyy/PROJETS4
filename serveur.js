@@ -1,3 +1,9 @@
+socket.on('enteredValet', () => {
+        if (socket.id === createur) {
+            console.log('received startValet event about to emit ValetStarting');
+            io.emit('valet ready to start');
+        }
+    });
 class DeckValet{
     constructor() {
         const symboles = ["Hearts", "Diamonds", "Clubs", "Spades"];
@@ -45,7 +51,7 @@ socket.on('start valet' , ()=> {
                 }
 
     }}); 
-    }); 
+    });
 
  socket.on('chercherjoueurtourvalet', ()=> {
         data = globalTour ; 
