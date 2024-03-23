@@ -9,9 +9,13 @@ socket.on('ValetClicked', () => {
         if (nbJ > nbMax) { io.emit('btnShow3'); }
     });
 socket.on('enteredValet', () => {
-        if (socket.id === createur) {
-            console.log('received startValet event about to emit ValetStarting');
-            io.emit('valet ready to start');
+        //console.log('receiving the "enteredValet" event');
+        //console.log('nombre max pour jouer au Valet :', nbMax);
+        joueursValets++;
+        //console.log('nombre des utilisateurs jouans Valet :', joueursValets);
+        if (joueursValets == nbMax) {
+            //console.log('received enteredValet event about to show the start button');
+            io.to(createur).emit('show the start button');
         }
     });
 class DeckValet{
@@ -46,6 +50,8 @@ class DeckValet{
 }
 
  socket.on('start valet' , ()=> {
+         //faire disparaître le bouton 'Commencer' pour tous les joueurs
+        io.emit('commencer le jeu pout tout le monde');
         const deck = new DeckValet(); 
         console.log(deck); 
         utilisateurs.forEach((player) => {
