@@ -26,6 +26,7 @@ class DeckValet{
             this.deck.push({symbol: symboles[i] , number : numeros[12]  })
 
         }
+        this.deck.pop(); 
         this.shuffle();
     }//construction des 52 cartes sockets
     shuffle() {//reposition des cartes pour la distribuer aux joueurs 
