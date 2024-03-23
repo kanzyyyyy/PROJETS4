@@ -44,8 +44,7 @@ class DeckValet{
 
 }
 
-
-socket.on('start valet' , ()=> {
+ socket.on('start valet' , ()=> {
         const deck = new DeckValet(); 
         console.log(deck); 
         utilisateurs.forEach((player) => {
@@ -54,14 +53,20 @@ socket.on('start valet' , ()=> {
                     let card = deck.distribuer(); 
                     player.cartes.push(card); 
                 }
-                while(Object.keys(deck).length != 0){
-                    let card = deck.distribuer(); 
-                    let randomindex= Math.floor(Math.random() * nbJ);
-                    utilisateurs[randomindex].cartes.push(card); 
-                }
+                
 
-    }}); 
-    });
+            }}); 
+            console.log(deck.deck.length); 
+        while(deck.deck.length !=0){
+                    let card = deck.distribuer(); 
+                    let randomindex= Math.floor(Math.random() * nbJ); 
+                    utilisateurs[randomindex].cartes.push(card); 
+                }; 
+        utilisateurs.forEach(player => {
+            console.log(player.cartes); 
+            
+        });
+    }); 
 
  socket.on('chercherjoueurtourvalet', ()=> {
         data = globalTour ; 
