@@ -20,8 +20,8 @@ socket.on('enteredValet', () => {
     });
 class DeckValet{
     constructor() {
-        const symboles = ["Hearts", "Diamonds", "Clubs", "Spades"];
-        const numeros = ["Ace", 2, 3, 4, 5, 6, 7, 8, 9, 10, "Queen" , "King" ,"Jack"];
+        const symboles = ["♥", "♦", "♣", "♠"];
+        const numeros = ["A", 2, 3, 4, 5, 6, 7, 8, 9, 10, "Q", "K", "J"];
         this.deck = [];
         for (let i = 0; i < symboles.length; i++) {
             for (let j = 0; j < numeros.length -1 ; j++) {
