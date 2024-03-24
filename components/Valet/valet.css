@@ -1,0 +1,75 @@
+/*loading spinner*/
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 10px solid #f3f3f3;
+  border-top: 10px solid #383636;
+  border-radius: 50%;
+  animation: spinner 1.5s linear infinite;
+}
+
+/*players cards*/
+
+.front {
+  width: 80px;
+  height: 120px;
+  border: 2px solid rgb(131, 126, 126);
+  border-radius: 10px;
+  background-color: rgb(211, 202, 202);
+  position: relative;
+}
+
+.front::before,
+.front::after {
+  content: attr(data-symbol);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(255, 0, 0); /* Making the symbols red */
+  font-size: 50px; /*size of the symbol */
+}
+
+.front .number-top {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+.front .symbol-top {
+  position: absolute;
+  top: 15px;
+  left: 5px;
+}
+
+.front .number-bottom {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  transform : rotate(180deg);/*make number upside down*/
+}
+
+.front .symbol-bottom {
+  position: absolute;
+  bottom: 15px;
+  right: 5px;
+  transform : rotate(180deg);/*make number upside down*/
+}
+
+.back {
+  width: 80px;
+  height: 120px;
+  background: no-repeat center/80% url('./back.png');
+  background-size:contain;
+  border-radius: 10px;
+  cursor: pointer;
+}
