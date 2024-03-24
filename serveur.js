@@ -70,7 +70,9 @@ class DeckValet{
                     utilisateurs[randomindex].cartes.push(card); 
                 }; 
         utilisateurs.forEach(player => {
-            console.log(player.cartes); 
+                console.log(player.cartes); 
+                io.to(player.userId).emit('cards to player' , player.cartes); 
+
             
         });
     }); 
