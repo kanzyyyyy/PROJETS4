@@ -7,9 +7,9 @@ const Player = ({ socket }) => {
     const [cartes, setCartes] = useState([]);
 
     useEffect(() => {
-        socket.on('cards to player', (players) => {
+        socket.on('cards to player', (player) => {
             console.log('received cards to player event');
-            const player = players.find((player) => player.userId === socket.id);
+            //const player = players.find((player) => player.userId === socket.id);
             if (player) {
                 setShowCartes(true);
                 setNom(player.username);
