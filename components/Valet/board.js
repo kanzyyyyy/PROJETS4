@@ -23,6 +23,7 @@ const Game = ({ socket }) => {
     }
     const quit = ()=>{
         navigate('/home');
+        socket.emit('quit',{id:socket.id});
     }
     return (
         <>
