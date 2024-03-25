@@ -50,6 +50,11 @@ class DeckValet{
 }
 
     socket.on('start valet' , ()=> {
+        //faire disparaître le bouton 'Commencer' pour tous les joueurs
+        io.emit('commencer le jeu pour tout le monde');
+        let player = utilisateurs.find((player) => player.userId == createur);
+        let msg = `c'est le tour de ${player.username} choisie une carte`;
+        io.emit('commentaires', { msg });
         const deck = new DeckValet(); 
         console.log(deck.deck.length); 
 
@@ -90,6 +95,15 @@ class DeckValet{
             console.log(player.cartes.length); 
             io.to(player.userId).emit('cards to player' , player.cartes); 
         });
+        setTimeout(() => {
+            for (let i = 0; i < utilisateurs.length; i++) {
+                let player = utilisateurs[i];
+                if (player.tour) {
+                    let prochainIndex = (i + 1) % utilisateurs.length;
+                    io.to(player.userId).emit('choisie une carte Valet', utilisateurs[prochainIndex].cartes);
+                }
+            }
+        }, "1000");
     }); 
  socket.on('chercherjoueurtourvalet', ()=> {
         data = globalTour ; 
