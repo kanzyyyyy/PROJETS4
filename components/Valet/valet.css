@@ -20,17 +20,18 @@
 
 /*players cards*/
 
-.front {
+.front1 {
   width: 80px;
   height: 120px;
   border: 2px solid rgb(131, 126, 126);
   border-radius: 10px;
   background-color: rgb(211, 202, 202);
   position: relative;
+  cursor: pointer;
 }
 
-.front::before,
-.front::after {
+.front1::before,
+.front1::after {
   content: attr(data-symbol);
   position: absolute;
   top: 50%;
@@ -40,31 +41,93 @@
   font-size: 50px; /*size of the symbol */
 }
 
-.front .number-top {
+.front2 {
+  width: 80px;
+  height: 120px;
+  border: 2px solid rgb(131, 126, 126);
+  border-radius: 10px;
+  background-color: rgb(211, 202, 202);
+  position: relative;
+  cursor: pointer;
+}
+
+.front2::before,
+.front2::after {
+  content: attr(data-symbol);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(20, 1, 1); /* Making the symbols red */
+  font-size: 50px; /*size of the symbol */
+}
+
+.front1 .number-top {
+  position: absolute;
+  color : rgb(255, 0, 0);
+  top: 5px;
+  left: 5px;
+  font-weight: 700;
+}
+.front1 .symbol-top {
+  position: absolute;
+  color : rgb(255, 0, 0);
+  top: 15px;
+  left: 5px;
+}
+
+.front1 .number-bottom {
+  position: absolute;
+  color : rgb(255, 0, 0);
+  bottom: 5px;
+  right: 5px;
+  transform : rotate(180deg);
+  font-weight: 700;
+}
+
+.front1 .symbol-bottom {
+  position: absolute;
+  color : rgb(255, 0, 0);
+  bottom: 15px;
+  right: 5px;
+  transform : rotate(180deg);
+}
+
+.front2 .number-top {
   position: absolute;
   top: 5px;
   left: 5px;
+  font-weight: 700;
 }
-.front .symbol-top {
+.front2 .symbol-top {
   position: absolute;
   top: 15px;
   left: 5px;
 }
 
-.front .number-bottom {
+.front2 .number-bottom {
   position: absolute;
   bottom: 5px;
   right: 5px;
-  transform : rotate(180deg);/*make number upside down*/
+  transform : rotate(180deg);
+  font-weight: 700;
 }
 
-.front .symbol-bottom {
+.front2 .symbol-bottom {
   position: absolute;
   bottom: 15px;
   right: 5px;
-  transform : rotate(180deg);/*make number upside down*/
+  transform : rotate(180deg);
 }
 
+.cartes-joueur .card:hover{
+
+  transform: rotateZ(5deg);
+}
+
+.card>*{
+  pointer-events: none;
+}
 .back {
   width: 80px;
   height: 120px;
