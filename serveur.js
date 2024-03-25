@@ -81,13 +81,9 @@ class DeckValet{
         utilisateurs.forEach(player =>{
             let cartes = player.cartes;
             console.log('les cartes de joueurs avant d`enlever les doublons',cartes);
-            for(let i=0;i<cartes.length;i++){
-                for(let j=0;j<cartes.length;j++){
-                    if(cartes[i].number==cartes[j].number){cartes.splice(i,1);cartes.splice(j,1);}
-                }
-            }
+            let cartesUnique = Array.from(new Set(cartes.map(carte => carte.number))).map(number => cartes.find(carte => carte.number === number));
             console.log('les cartes de joueurs APRES d`enlever les doublons',cartes);
-            player.cartes=cartes;
+            player.cartes=cartesUnique;
         });
         utilisateurs.forEach(player => {
             console.log(player.cartes); 
