@@ -7,15 +7,25 @@ const Game = ({ socket }) => {
     const [showSpinner, setSpinner] = useState(true);
     const [quitButton] = useState(true);
     const [startButton, setStart] = useState(false);
+    const [instructions,setInstructions]= useState(false);
+    const [commentaires,setCommentaire]=useState("");
+    const [cartesCachees,setCartesC]=useState([]);
     useEffect(()=>{
         socket.on('show the start button',()=>{
             setSpinner(false);
             setStart(true);
         });
 
-        socket.on('commencer le jeu pout tout le monde',()=>{
+        socket.on('commencer le jeu pour tout le monde',()=>{
             setSpinner(false);
             setStart(false);
+        });
+        socket.on('commentaires',(data)=>{
+            setInstructions(true);
+            setCommentaire(data.msg);
+        });
+        socket.on('choisie une carte Valet',(cartes)=>{
+            setCartesC(cartes);
         });
     });
     const startgame = ()=>{
@@ -44,6 +54,10 @@ const Game = ({ socket }) => {
             {quitButton && (
                 <button onClick={quit} className='btn'> Quitter !</button>
             )}
+
+            {instructions && (<div>
+                <p style={{ color: 'white', fontFamily: 'Gill Sans, sans-serif' }}>{commentaires}</p>
+            </div>)}
         </>
     );
 };
