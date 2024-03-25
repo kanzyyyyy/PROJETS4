@@ -30,6 +30,18 @@ const Player = ({ socket }) => {
         console.log("selected card is : " + carte.number + " " + carte.symbol + " selected by " + nomJoueur);
     };
 
+    const shuffle = ()=>{
+        const cartesMelangee = [...cartes];
+        let n = cartesMelangee.length;
+        for (var i = 0; i < n; i++) {
+            let j = Math.floor(Math.random() * n);
+            let tmp = cartesMelangee[i];
+            cartesMelangee[i] = cartesMelangee[j];
+            cartesMelangee[j] = tmp;
+        }
+        setCartes(cartesMelangee);
+    }
+
     return (
         <div>
             {nomJoueur && <h2>{nomJoueur}</h2>}
@@ -54,12 +66,9 @@ const Player = ({ socket }) => {
                     </div>
                 ))}
             </div>
-
+            <button className='shuffle' onClick={shuffle}>Mélanger!</button>
         </div>
     );
 };
 
 export default Player;
-
-
-
