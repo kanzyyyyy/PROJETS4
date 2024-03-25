@@ -95,17 +95,40 @@ class DeckValet{
             console.log(player.cartes.length); 
             io.to(player.userId).emit('cards to player' , player.cartes); 
         });
+    }); 
+    socket.on('chercherjoueurtourvalet', ()=> {
+        data = globalTour ; 
+        let nextjoueur = data+1; 
+        if(nextjoueur === nbJ){
+            nextjoueur = 0; 
+        }
+        let user = utilisateurs.find((user) => user.username === utilisateurs[data].username); 
+        user.tour = true; 
+        //io.emit('tourdujoueur' , {userId : utilisateurs[data].userId , username : utilisateurs[data].username , userIdNEXT : utilisateurs[nextjoueur].userId , usernameNEXT : utilisateurs[nextjoueur].username , cartes : utilisateurs[nextjoueur].cartes}); 
+        //user = utilisateurs.find((user) => user.username == player[0]);
         setTimeout(() => {
             for (let i = 0; i < utilisateurs.length; i++) {
                 let player = utilisateurs[i];
                 if (player.tour) {
-                    let prochainIndex = (i + 1) % utilisateurs.length;
-                    io.to(player.userId).emit('choisie une carte Valet', utilisateurs[prochainIndex].cartes);
+                    let prochainIndex = ((i + 1) % utilisateurs.length );
+                    io.to(player.userId).emit('choisie une carte Valet', {joueur : player ,infonextplayer : utilisateurs[prochainIndex].username ,infonextplayerID : utilisateurs[prochainIndex],cartes : utilisateurs[prochainIndex].cartes});
+                    console.log("cartes du prochain joueur" , utilisateurs); 
+                    console.log("Le joueur qui a le tour c'est " + player.username + " avec le nombre de tour : " + data + "il prendra la carte du joueur" + utilisateurs[prochainIndex].username)
                 }
             }
+
         }, "1000");
+
+        //console.log("Le joueur qui a le tour c'est " + joueur + " avec le nombre de tour : " + data + "il prendra la carte du joueur" + utilisateurs[nextjoueur].username)
+
     }); 
- socket.on('chercherjoueurtourvalet', ()=> {
-        data = globalTour ; 
-        io.emit('tourdujoueur' , {userId : utilisateurs[data].userId , username : utilisateurs[data].username , userIdNEXT : utilisateurs[data+1].userId , usernameNEXT : utilisateurs[data+1].username}); 
+    socket.on('joueuraclicke', (data)=>{ // the data should contain username of joueur qui a joue + next joueur
+        let user = utilisateurs.find((user) => user.username === data.username); 
+        let user2 = utilisateurs.find((user) => user.username === data.user2); 
+        user.tour = false ; 
+        user2.cartes = user2.cartes.filter((card) => card.number === data.carte.number && card.symbol === data.carte.symbol); 
+        globalTour ++; 
+        io.emit('UpdateCards', ); 
+        io.to(data.userId).emit('UpdateCards' , ); 
     }); 
+
